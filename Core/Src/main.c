@@ -35,7 +35,6 @@ int main(void)
 
     // Configure I2C to speak to the notecard using our implementation
     soi2cContext_t soi2c = {0};
-    soi2c.addr = 0x23;
     soi2c.tx = i2cTransmit;
     soi2c.rx = i2cReceive;
     soi2c.delay = i2cDelayMs;
@@ -46,7 +45,7 @@ int main(void)
     // Test
     while (true) {
         uint32_t reqlen, rsplen;
-        static uint8_t req[256], rsp[256];
+        static uint8_t req[256], rsp[512];
         static jsonbContext jsonb;
         soiStatus_t status;
 
@@ -135,7 +134,9 @@ static void MX_I2C1_Init(void)
 {
 
     hi2c1.Instance = I2C1;
-    hi2c1.Init.Timing = 0x00000E14;
+//   hi2c1.Init.Timing = 0x00303D5B;    // From swan
+//    hi2c1.Init.Timing = 0x00000E14;   // From Cube
+    hi2c1.Init.Timing = 0x00707CBB;     // From note-stm32l4 example
     hi2c1.Init.OwnAddress1 = 0;
     hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
     hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;

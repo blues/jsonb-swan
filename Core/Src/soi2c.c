@@ -31,6 +31,11 @@ int soi2cTransaction(soi2cContext_t *ctx, uint8_t *reqbuf, uint32_t reqbuflen, u
         *rsplen = 0;
     }
 
+    // Default i2c address to the notecard
+    if (ctx->addr == 0) {
+        ctx->addr = 0x17;
+    }
+
     // Exit if not configured
     if (ctx->addr == 0 || ctx->tx == NULL || ctx->rx == NULL || ctx->delay == NULL || reqbuflen < 3) {
         return SOI2C_CONFIG;
@@ -57,14 +62,13 @@ int soi2cTransaction(soi2cContext_t *ctx, uint8_t *reqbuf, uint32_t reqbuflen, u
         }
 
         reqbuf[0] = chunklen;
-        if (!ctx->tx(ctx->addr, reqbuf, chunklen)) {
+        if (!ctx->tx(ctx->addr, reqbuf, 1+chunklen)) {
             return SOI2C_IO_TRANSMIT;
         }
+        ctx->delay(250);
 
         left -= chunklen;
         memmove(&reqbuf[1], &reqbuf[1+chunklen], left);
-
-        ctx->delay(250);
 
     }
 
@@ -79,17 +83,24 @@ int soi2cTransaction(soi2cContext_t *ctx, uint8_t *reqbuf, uint32_t reqbuflen, u
     uint8_t chunklen = 0;
     while (true) {
 
+        // Constrain by our buffer size
+        if (chunklen > (reqbuflen - 2)) {
+            chunklen = reqbuflen - 2;
+        }
+
         // Issue special write transaction that is a 'read will come next' transaction
         reqbuf[0] = 0;
         reqbuf[1] = chunklen;
         if (!ctx->tx(ctx->addr, reqbuf, 2)) {
             return SOI2C_IO_TRANSMIT;
         }
+        ctx->delay(1);
 
         // Receive the chunk of data
         if (!ctx->rx(ctx->addr, reqbuf, chunklen+2)) {
             return SOI2C_IO_TRANSMIT;
         }
+        ctx->delay(5);
 
         // Verify size
         uint8_t availableBytes = reqbuf[0];
@@ -100,14 +111,14 @@ int soi2cTransaction(soi2cContext_t *ctx, uint8_t *reqbuf, uint32_t reqbuflen, u
 
         // Only move bytes into the response buffer if a nonzero length specified,
         // else just flush it.
-        if (rspbuflen != 0) {
+        if (rspbuflen != 0 && chunklen > 0) {
             if (chunklen > rspbufleft) {
                 return SOI2C_RX_BUFFER_OVERFLOW;
             }
-            memcpy(&rspbuf[reqbuflen-rspbufleft], &reqbuf[2], chunklen);
+            memcpy(&rspbuf[rspbuflen-rspbufleft], &reqbuf[2], chunklen);
             rspbufleft -= chunklen;
             if (rsplen != NULL) {
-                *rsplen = reqbuflen-rspbufleft;
+                *rsplen = rspbuflen-rspbufleft;
             }
         }
 
