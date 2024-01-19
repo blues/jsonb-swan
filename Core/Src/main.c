@@ -52,9 +52,9 @@ int main(void)
 
         // Format a JSONB request to be sent to the notecard
         jsonbFormatBegin(&jsonb, req, sizeof(req), NULL);
-        jsonbAppendObjectBegin(&jsonb);
-        jsonbAppendItemString(&jsonb, "req", "card.version");
-        jsonbAppendObjectEnd(&jsonb);
+        jsonbAddObjectBegin(&jsonb);
+        jsonbAddStringToObject(&jsonb, "req", "card.version");
+        jsonbAddObjectEnd(&jsonb);
         jsonbFormatEnd(&jsonb);
         reqlen = jsonbBuf(&jsonb, NULL, NULL);
         if (reqlen == 0) {
@@ -90,7 +90,7 @@ int main(void)
         // Look for an error
         uint8_t itemType;
         uint8_t *itemValue;
-        if (jsonbFindObjectItem(&jsonb, "err", &itemType, &itemValue)) {
+        if (jsonbGetObjectItem(&jsonb, "err", &itemType, &itemValue)) {
             HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
             HAL_Delay(1000);
             HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
