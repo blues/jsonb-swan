@@ -45,8 +45,9 @@ int main(void)
     // Test
     while (true) {
         uint32_t reqlen, rsplen;
-        static uint8_t req[256], rsp[512];
-        static jsonbContext jsonb;
+        uint8_t *rsp;
+        uint8_t req[512];
+        jsonbContext jsonb;
         soiStatus_t status;
 
         // Format a JSONB request to be sent to the notecard
@@ -54,13 +55,14 @@ int main(void)
         jsonbAppendObjectBegin(&jsonb);
         jsonbAppendItemString(&jsonb, "req", "card.version");
         jsonbAppendObjectEnd(&jsonb);
-        reqlen = jsonbFormatEnd(&jsonb);
+        jsonbFormatEnd(&jsonb);
+        reqlen = jsonbBuf(&jsonb, NULL, NULL);
         if (reqlen == 0) {
             Error_Handler();
         }
 
         // Send the JSONB request over I2C, and receive the response in the same buffer
-        status = soi2cTransaction(&soi2c, req, sizeof(req), reqlen, rsp, sizeof(rsp), &rsplen);
+        status = soi2cRequestResponse(&soi2c, req, sizeof(req));
         if (status != SOI2C_OK) {
             for (int i=0; i<status; i++) {
                 HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
@@ -73,6 +75,7 @@ int main(void)
         }
 
         // Parse the response
+        rsplen = soi2cBuf(&soi2c, &rsp, NULL);
         if (!jsonbParse(&jsonb, rsp, rsplen)) {
             for (int i=0; i<3; i++) {
                 HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
