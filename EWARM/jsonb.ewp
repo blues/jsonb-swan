@@ -280,7 +280,7 @@
                 <option>
                     <name>CCAllowList</name>
                     <version>1</version>
-                    <state>00000000</state>
+                    <state>11111110</state>
                 </option>
                 <option>
                     <name>CCDebugInfo</name>
@@ -341,7 +341,7 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$/../Core/Inc</state>
-                    <state>$PROJ_DIR$/../../notecard/src/jsonb</state>
+                    <state>$PROJ_DIR$/../note-c-zero</state>
                     <state>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Inc</state>
                     <state>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy</state>
                     <state>$PROJ_DIR$/../Drivers/CMSIS/Device/ST/STM32L4xx/Include</state>
@@ -361,7 +361,7 @@
                 </option>
                 <option>
                     <name>CCOptLevel</name>
-                    <state>0</state>
+                    <state>3</state>
                 </option>
                 <option>
                     <name>CCOptStrategy</name>
@@ -370,7 +370,7 @@
                 </option>
                 <option>
                     <name>CCOptLevelSlave</name>
-                    <state>0</state>
+                    <state>3</state>
                 </option>
                 <option>
                     <name>CCPosIndRopi</name>
@@ -1075,6 +1075,15 @@
             </file>
         </group>
         <group>
+            <name>note-c-zero</name>
+            <file>
+                <name>$PROJ_DIR$\..\..\note-c-zero\jsonb.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\note-c-zero\soi2c.c</name>
+            </file>
+        </group>
+        <group>
             <name>User</name>
             <group>
                 <name>Core</name>
@@ -1089,12 +1098,6 @@
                 </file>
             </group>
         </group>
-        <file>
-            <name>$PROJ_DIR$\..\..\notecard\src\jsonb\jsonb.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Core\Src\soi2c.c</name>
-        </file>
     </group>
     <group>
         <name>Drivers</name>

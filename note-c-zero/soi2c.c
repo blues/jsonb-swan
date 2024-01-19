@@ -83,7 +83,7 @@ int soi2cTransaction(soi2cContext_t *ctx, uint32_t flags, uint8_t *buf, uint32_t
 
     }
 
-    // Exit if a "cmd" was sent and no response is expected.  
+    // Exit if a "cmd" was sent and no response is expected.
     if ((flags & SOI2C_NO_RESPONSE) != 0) {
         return SOI2C_OK;
     }

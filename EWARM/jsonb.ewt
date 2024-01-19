@@ -1429,6 +1429,15 @@
             </file>
         </group>
         <group>
+            <name>note-c-zero</name>
+            <file>
+                <name>$PROJ_DIR$\..\..\note-c-zero\jsonb.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\note-c-zero\soi2c.c</name>
+            </file>
+        </group>
+        <group>
             <name>User</name>
             <group>
                 <name>Core</name>
@@ -1443,12 +1452,6 @@
                 </file>
             </group>
         </group>
-        <file>
-            <name>$PROJ_DIR$\..\..\notecard\src\jsonb\jsonb.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Core\Src\soi2c.c</name>
-        </file>
     </group>
     <group>
         <name>Drivers</name>
