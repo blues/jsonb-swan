@@ -3,28 +3,35 @@
 #include "soi2c.h"
 #include "jsonb.h"
 
-I2C_HandleTypeDef hi2c1;
-
-#define LED_Pin                 GPIO_PIN_2						// PE2 [SWAN LED]
+// SWAN LED
+#define LED_Pin                 GPIO_PIN_2
 #define LED_GPIO_Port           GPIOE
 
 void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
-static void MX_I2C1_Init(void);
-bool i2cTransmit(uint16_t deviceAddr, uint8_t *buf, uint16_t buflen);
-bool i2cReceive(uint16_t deviceAddr, uint8_t *buf, uint16_t buflen);
+bool i2cTransmit(void *port, uint16_t deviceAddr, uint8_t *buf, uint16_t buflen);
+bool i2cReceive(void *port, uint16_t deviceAddr, uint8_t *buf, uint16_t buflen);
 void i2cDelayMs(uint32_t ms);
 
 int main(void)
 {
 
-    // Setup
+    // Init HAL
     HAL_Init();
-    SystemClock_Config();
-    MX_GPIO_Init();
-    MX_I2C1_Init();
 
-    // Init busy indicator
+    // Init clocks
+    SystemClock_Config();
+
+    // Init GPIO
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOC_CLK_ENABLE();
+    __HAL_RCC_GPIOD_CLK_ENABLE();
+    __HAL_RCC_GPIOE_CLK_ENABLE();
+    __HAL_RCC_GPIOF_CLK_ENABLE();
+    __HAL_RCC_GPIOG_CLK_ENABLE();
+    __HAL_RCC_GPIOH_CLK_ENABLE();
+
+    // Init busy indicator GPIO
     GPIO_InitTypeDef GPIO_InitStruct;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -33,8 +40,30 @@ int main(void)
     HAL_GPIO_Init(LED_GPIO_Port, &GPIO_InitStruct);
     HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
 
+    // Init I2C1
+    I2C_HandleTypeDef hi2c1 = {0};
+    hi2c1.Instance = I2C1;
+    hi2c1.Init.Timing = 0x00707CBB;     // note-stm32l4
+    hi2c1.Init.OwnAddress1 = 0;
+    hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+    hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+    hi2c1.Init.OwnAddress2 = 0;
+    hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+    hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+    hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+    if (HAL_I2C_Init(&hi2c1) != HAL_OK) {
+        Error_Handler();
+    }
+    if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK) {
+        Error_Handler();
+    }
+    if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK) {
+        Error_Handler();
+    }
+
     // Configure I2C to speak to the notecard using our implementation
     soi2cContext_t soi2c = {0};
+    soi2c.port = &hi2c1;
     soi2c.tx = i2cTransmit;
     soi2c.rx = i2cReceive;
     soi2c.delay = i2cDelayMs;
@@ -44,7 +73,7 @@ int main(void)
 
     // Test
     while (true) {
-        uint32_t reqlen, rsplen;
+        uint32_t rsplen;
         uint8_t *rsp;
         uint8_t req[512];
         jsonbContext jsonb;
@@ -129,46 +158,7 @@ void SystemClock_Config(void)
     }
 }
 
-static void MX_I2C1_Init(void)
-{
-
-    hi2c1.Instance = I2C1;
-//   hi2c1.Init.Timing = 0x00303D5B;    // From swan
-//    hi2c1.Init.Timing = 0x00000E14;   // From Cube
-    hi2c1.Init.Timing = 0x00707CBB;     // From note-stm32l4 example
-    hi2c1.Init.OwnAddress1 = 0;
-    hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-    hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-    hi2c1.Init.OwnAddress2 = 0;
-    hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
-    hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-    hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-    if (HAL_I2C_Init(&hi2c1) != HAL_OK) {
-        Error_Handler();
-    }
-
-    if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK) {
-        Error_Handler();
-    }
-
-    if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK) {
-        Error_Handler();
-    }
-
-}
-
-static void MX_GPIO_Init(void)
-{
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    __HAL_RCC_GPIOC_CLK_ENABLE();
-    __HAL_RCC_GPIOD_CLK_ENABLE();
-    __HAL_RCC_GPIOE_CLK_ENABLE();
-    __HAL_RCC_GPIOF_CLK_ENABLE();
-    __HAL_RCC_GPIOG_CLK_ENABLE();
-    __HAL_RCC_GPIOH_CLK_ENABLE();
-}
-
+// Error handling
 void Error_Handler(void)
 {
     bool on = false;
@@ -179,24 +169,18 @@ void Error_Handler(void)
     }
 }
 
-#ifdef  USE_FULL_ASSERT
-void assert_failed(uint8_t *file, uint32_t line)
-{
-}
-#endif
-
 // Transmits in master mode an amount of data, in blocking mode. The address
 // is the actual address; the caller should have shifted it right so that the
 // low bit is NOT the read/write bit.  True is returned if success
-bool i2cTransmit(uint16_t deviceAddr, uint8_t *buf, uint16_t buflen)
+bool i2cTransmit(void *port, uint16_t deviceAddr, uint8_t *buf, uint16_t buflen)
 {
-    return (HAL_I2C_Master_Transmit(&hi2c1, deviceAddr<<1, buf, buflen, 250) == HAL_OK);
+    return (HAL_I2C_Master_Transmit((I2C_HandleTypeDef *) port, deviceAddr<<1, buf, buflen, 250) == HAL_OK);
 }
 
 // Receives in master mode an amount of data in blocking mode, returning success
-bool i2cReceive(uint16_t deviceAddr, uint8_t *buf, uint16_t buflen)
+bool i2cReceive(void *port, uint16_t deviceAddr, uint8_t *buf, uint16_t buflen)
 {
-    return (HAL_I2C_Master_Receive(&hi2c1, deviceAddr<<1, buf, buflen, 250) == HAL_OK);
+    return (HAL_I2C_Master_Receive((I2C_HandleTypeDef *) port, deviceAddr<<1, buf, buflen, 250) == HAL_OK);
 }
 
 // Delays the specified number of milliseconds

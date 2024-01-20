@@ -1431,10 +1431,10 @@
         <group>
             <name>note-c-zero</name>
             <file>
-                <name>$PROJ_DIR$\..\..\note-c-zero\jsonb.c</name>
+                <name>$PROJ_DIR$\..\note-c-zero\jsonb.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\note-c-zero\soi2c.c</name>
+                <name>$PROJ_DIR$\..\note-c-zero\soi2c.c</name>
             </file>
         </group>
         <group>
