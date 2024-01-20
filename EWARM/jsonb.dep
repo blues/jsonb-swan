@@ -200,12 +200,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\note-c-zero\jsonb.c</name>
-            <outputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 61</file>
-                </tool>
-            </outputs>
             <inputs>
                 <tool>
                     <name>ICCARM</name>
@@ -501,7 +495,7 @@
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 29 73</file>
+                    <file> 73 29</file>
                 </tool>
             </outputs>
         </file>

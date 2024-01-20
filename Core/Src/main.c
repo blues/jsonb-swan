@@ -51,13 +51,9 @@ int main(void)
         soiStatus_t status;
 
         // Format a JSONB request to be sent to the notecard
-        jsonbFormatBegin(&jsonb, req, sizeof(req), NULL);
-        jsonbAddObjectBegin(&jsonb);
+        jsonbObjectBegin(&jsonb, req, sizeof(req), NULL);
         jsonbAddStringToObject(&jsonb, "req", "card.version");
-        jsonbAddObjectEnd(&jsonb);
-        jsonbFormatEnd(&jsonb);
-        reqlen = jsonbBuf(&jsonb, NULL, NULL);
-        if (reqlen == 0) {
+        if (!jsonbObjectEnd(&jsonb)) {
             Error_Handler();
         }
 

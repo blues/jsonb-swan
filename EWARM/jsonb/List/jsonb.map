@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V9.20.2.320/W64 for ARM                  19/Jan/2024  17:18:21
+# IAR ELF Linker V9.20.2.320/W64 for ARM                  20/Jan/2024  11:44:22
 # Copyright 2007-2021 IAR Systems AB.
 #
 #    Output file  =  C:\Users\rozzie\dev\jsonb-swan\EWARM\jsonb\Exe\jsonb.out
@@ -78,7 +78,7 @@ initialize by copy { rw };
   .intvec            ro code   0x800'0000   0x1bc  startup_stm32l4r5xx.o [1]
                              - 0x800'01bc   0x1bc
 
-"P1":                                      0x2520
+"P1":                                      0x251c
   .text              ro code   0x800'01bc   0x7a8  stm32l4xx_hal_rcc.o [5]
   .text              ro code   0x800'0964    0x44  stm32l4xx_hal.o [5]
   .text              ro code   0x800'09a8     0xc  stm32l4xx_hal.o [5]
@@ -88,38 +88,39 @@ initialize by copy { rw };
   .text              ro code   0x800'10e4    0xb8  stm32l4xx_hal_msp.o [2]
   .text              ro code   0x800'119c    0x14  memset.o [8]
   .text              ro code   0x800'11b0   0x57c  stm32l4xx_hal_rcc_ex.o [5]
-  .text              ro code   0x800'172c   0x2dc  main.o [2]
-  .text              ro code   0x800'1a08   0x204  stm32l4xx_hal_gpio.o [5]
-  .text              ro code   0x800'1c0c    0x66  ABImemset.o [8]
-  .text              ro code   0x800'1c72    0x2a  copy_init3.o [8]
-  .text              ro code   0x800'1c9c    0x1e  stm32l4xx_hal.o [5]
-  .text              ro code   0x800'1cbc    0x7e  stm32l4xx_hal_i2c_ex.o [5]
-  .text              ro code   0x800'1d3c     0x6  ABImemclr4.o [8]
-  .text              ro code   0x800'1d42   0x188  soi2c.o [3]
-  .text              ro code   0x800'1ecc    0x28  stm32l4xx_hal.o [5]
-  .text              ro code   0x800'1ef4   0x42e  jsonb.o [3]
-  .text              ro code   0x800'2324    0x32  ABImemset48.o [8]
-  .text              ro code   0x800'2358    0x1e  ABImemmove_small.o [8]
-  .text              ro code   0x800'2378    0x18  memchr_small.o [8]
-  .text              ro code   0x800'2390    0x14  strlen_small.o [8]
-  .text              ro code   0x800'23a4    0x1e  memcmp_small.o [8]
-  .text              ro code   0x800'23c4    0x18  ABImemcpy_small.o [8]
-  .text              ro code   0x800'23dc    0x38  zero_init3.o [8]
-  .rodata            const     0x800'2414    0x30  system_stm32l4xx.o [4]
-  .text              ro code   0x800'2444    0x28  data_init.o [8]
-  .text              ro code   0x800'246c    0x22  fpinit_M.o [7]
-  .iar.init_table    const     0x800'2490    0x24  - Linker created -
-  .text              ro code   0x800'24b4    0x20  system_stm32l4xx.o [4]
-  .text              ro code   0x800'24d4    0x1e  cmain.o [8]
-  .text              ro code   0x800'24f2     0x4  low_level_init.o [6]
-  .text              ro code   0x800'24f6     0x4  exit.o [6]
-  .text              ro code   0x800'24fc     0xa  cexit.o [8]
-  .text              ro code   0x800'2508    0x14  exit.o [9]
-  .text              ro code   0x800'251c    0x1c  cstartup_M.o [8]
-  .text              ro code   0x800'2538    0x14  stm32l4xx_it.o [2]
-  .text              ro code   0x800'254c    0x10  stm32l4xx_hal.o [5]
-  .text              ro code   0x800'255c    0x10  startup_stm32l4r5xx.o [1]
-  Initializer bytes  const     0x800'256c    0x10  <for P2-1>
+  .text              ro code   0x800'172c   0x2c8  main.o [2]
+  .text              ro code   0x800'19f4   0x204  stm32l4xx_hal_gpio.o [5]
+  .text              ro code   0x800'1bf8    0x66  ABImemset.o [8]
+  .text              ro code   0x800'1c5e    0x2a  copy_init3.o [8]
+  .text              ro code   0x800'1c88    0x1e  stm32l4xx_hal.o [5]
+  .text              ro code   0x800'1ca8    0x7e  stm32l4xx_hal_i2c_ex.o [5]
+  .text              ro code   0x800'1d28     0x6  ABImemclr4.o [8]
+  .text              ro code   0x800'1d2e   0x188  soi2c.o [3]
+  .text              ro code   0x800'1eb8    0x28  stm32l4xx_hal.o [5]
+  .text              ro code   0x800'1ee0   0x43e  jsonb.o [3]
+  .text              ro code   0x800'2320    0x32  ABImemset48.o [8]
+  .text              ro code   0x800'2354    0x1e  ABImemmove_small.o [8]
+  .text              ro code   0x800'2374    0x18  memchr_small.o [8]
+  .text              ro code   0x800'238c    0x14  strlen_small.o [8]
+  .text              ro code   0x800'23a0    0x1e  memcmp_small.o [8]
+  .text              ro code   0x800'23c0    0x18  ABImemcpy_small.o [8]
+  .text              ro code   0x800'23d8    0x38  zero_init3.o [8]
+  .rodata            const     0x800'2410    0x30  system_stm32l4xx.o [4]
+  .text              ro code   0x800'2440    0x28  data_init.o [8]
+  .text              ro code   0x800'2468    0x22  fpinit_M.o [7]
+  .iar.init_table    const     0x800'248c    0x24  - Linker created -
+  .text              ro code   0x800'24b0    0x20  system_stm32l4xx.o [4]
+  .text              ro code   0x800'24d0    0x1e  cmain.o [8]
+  .text              ro code   0x800'24ee     0x4  low_level_init.o [6]
+  .text              ro code   0x800'24f2     0x4  exit.o [6]
+  .text              ro code   0x800'24f8     0xa  cexit.o [8]
+  .text              ro code   0x800'2504    0x14  exit.o [9]
+  .text              ro code   0x800'2518    0x1c  cstartup_M.o [8]
+  .text              ro code   0x800'2534    0x14  stm32l4xx_it.o [2]
+  .text              ro code   0x800'2548    0x10  stm32l4xx_hal.o [5]
+  .text              ro code   0x800'2558    0x10  startup_stm32l4r5xx.o [1]
+  Initializer bytes  const     0x800'2568    0x10  <for P2-1>
+  .text              ro code   0x800'2578     0x4  startup_stm32l4r5xx.o [1]
   .text              ro code   0x800'257c     0x4  startup_stm32l4r5xx.o [1]
   .text              ro code   0x800'2580     0x4  startup_stm32l4r5xx.o [1]
   .text              ro code   0x800'2584     0x4  startup_stm32l4r5xx.o [1]
@@ -207,10 +208,9 @@ initialize by copy { rw };
   .text              ro code   0x800'26cc     0x4  startup_stm32l4r5xx.o [1]
   .text              ro code   0x800'26d0     0x4  startup_stm32l4r5xx.o [1]
   .text              ro code   0x800'26d4     0x4  startup_stm32l4r5xx.o [1]
-  .text              ro code   0x800'26d8     0x4  startup_stm32l4r5xx.o [1]
-  .rodata            const     0x800'26dc     0x0  zero_init3.o [8]
-  .rodata            const     0x800'26dc     0x0  copy_init3.o [8]
-                             - 0x800'26dc  0x2520
+  .rodata            const     0x800'26d8     0x0  zero_init3.o [8]
+  .rodata            const     0x800'26d8     0x0  copy_init3.o [8]
+                             - 0x800'26d8  0x251c
 
 "P2", part 1 of 3:                           0x10
   P2-1                        0x2000'0000    0x10  <Init block>
@@ -231,7 +231,7 @@ Unused ranges:
 
          From           To       Size
          ----           --       ----
-   0x800'26dc   0x81f'ffff  0x1f'd924
+   0x800'26d8   0x81f'ffff  0x1f'd928
   0x2000'0064  0x2000'0067        0x4
   0x2000'0468  0x2009'ffff   0x9'fb98
 
@@ -248,7 +248,7 @@ Zero (__iar_zero_init3)
 
 Copy (__iar_copy_init3)
     1 source range, total size 0x10:
-           0x800'256c  0x10
+           0x800'2568  0x10
     1 destination range, total size 0x10:
           0x2000'0000  0x10
 
@@ -270,17 +270,17 @@ C:\Users\rozzie\dev\jsonb-swan\EWARM\jsonb\Obj\Application\EWARM: [1]
     Total:                      812
 
 C:\Users\rozzie\dev\jsonb-swan\EWARM\jsonb\Obj\Application\User\Core: [2]
-    main.o                      732                84
+    main.o                      712                84
     stm32l4xx_hal_msp.o         184
     stm32l4xx_it.o               20
     -------------------------------------------------
-    Total:                      936                84
+    Total:                      916                84
 
 C:\Users\rozzie\dev\jsonb-swan\EWARM\jsonb\Obj\Application\note-c-zero: [3]
-    jsonb.o                   1'070
+    jsonb.o                   1'086
     soi2c.o                     392
     -------------------------------------------------
-    Total:                    1'462
+    Total:                    1'478
 
 C:\Users\rozzie\dev\jsonb-swan\EWARM\jsonb\Obj\Drivers\CMSIS: [4]
     system_stm32l4xx.o           32       52        4
@@ -337,7 +337,7 @@ shb_l.a: [9]
     Gaps                         18        2
     Linker created                        36    1'024
 -----------------------------------------------------
-    Grand Total:              9'846      102    1'124
+    Grand Total:              9'842      102    1'124
 
 
 *******************************************************************************
@@ -346,30 +346,30 @@ shb_l.a: [9]
 
 Entry                       Address   Size  Type      Object
 -----                       -------   ----  ----      ------
-.iar.init_table$$Base    0x800'2490          --   Gb  - Linker created -
-.iar.init_table$$Limit   0x800'24b4          --   Gb  - Linker created -
-?main                    0x800'24d5         Code  Gb  cmain.o [8]
-AHBPrescTable            0x800'24c4   0x10  Data  Gb  system_stm32l4xx.o [4]
-BusFault_Handler         0x800'253f    0x2  Code  Gb  stm32l4xx_it.o [2]
+.iar.init_table$$Base    0x800'248c          --   Gb  - Linker created -
+.iar.init_table$$Limit   0x800'24b0          --   Gb  - Linker created -
+?main                    0x800'24d1         Code  Gb  cmain.o [8]
+AHBPrescTable            0x800'24c0   0x10  Data  Gb  system_stm32l4xx.o [4]
+BusFault_Handler         0x800'253b    0x2  Code  Gb  stm32l4xx_it.o [2]
 CSTACK$$Base            0x2000'0068          --   Gb  - Linker created -
 CSTACK$$Limit           0x2000'0468          --   Gb  - Linker created -
-DebugMon_Handler         0x800'2545    0x2  Code  Gb  stm32l4xx_it.o [2]
-Error_Handler            0x800'198f   0x1a  Code  Gb  main.o [2]
-HAL_Delay                0x800'1ecd   0x28  Code  Wk  stm32l4xx_hal.o [5]
-HAL_GPIO_Init            0x800'1a09  0x1d0  Code  Gb  stm32l4xx_hal_gpio.o [5]
-HAL_GPIO_WritePin        0x800'1bd9    0xa  Code  Gb  stm32l4xx_hal_gpio.o [5]
+DebugMon_Handler         0x800'2541    0x2  Code  Gb  stm32l4xx_it.o [2]
+Error_Handler            0x800'1979   0x1a  Code  Gb  main.o [2]
+HAL_Delay                0x800'1eb9   0x28  Code  Wk  stm32l4xx_hal.o [5]
+HAL_GPIO_Init            0x800'19f5  0x1d0  Code  Gb  stm32l4xx_hal_gpio.o [5]
+HAL_GPIO_WritePin        0x800'1bc5    0xa  Code  Gb  stm32l4xx_hal_gpio.o [5]
 HAL_GetTick              0x800'09a9    0xc  Code  Wk  stm32l4xx_hal.o [5]
 HAL_I2CEx_ConfigAnalogFilter
-                         0x800'1cbd   0x2a  Code  Gb  stm32l4xx_hal_i2c_ex.o [5]
+                         0x800'1ca9   0x2a  Code  Gb  stm32l4xx_hal_i2c_ex.o [5]
 HAL_I2CEx_ConfigDigitalFilter
-                         0x800'1ce7   0x26  Code  Gb  stm32l4xx_hal_i2c_ex.o [5]
+                         0x800'1cd3   0x26  Code  Gb  stm32l4xx_hal_i2c_ex.o [5]
 HAL_I2C_Init             0x800'0b25   0xa8  Code  Gb  stm32l4xx_hal_i2c.o [5]
 HAL_I2C_Master_Receive   0x800'0c9f   0x90  Code  Gb  stm32l4xx_hal_i2c.o [5]
 HAL_I2C_Master_Transmit
                          0x800'0bdd   0xc2  Code  Gb  stm32l4xx_hal_i2c.o [5]
 HAL_I2C_MspInit          0x800'1111   0x7c  Code  Gb  stm32l4xx_hal_msp.o [2]
-HAL_IncTick              0x800'254d   0x10  Code  Wk  stm32l4xx_hal.o [5]
-HAL_Init                 0x800'1c9d   0x1e  Code  Gb  stm32l4xx_hal.o [5]
+HAL_IncTick              0x800'2549   0x10  Code  Wk  stm32l4xx_hal.o [5]
+HAL_Init                 0x800'1c89   0x1e  Code  Gb  stm32l4xx_hal.o [5]
 HAL_InitTick             0x800'0965   0x44  Code  Wk  stm32l4xx_hal.o [5]
 HAL_MspInit              0x800'10e5   0x2c  Code  Gb  stm32l4xx_hal_msp.o [2]
 HAL_NVIC_SetPriority     0x800'0aad   0x3a  Code  Gb  stm32l4xx_hal_cortex.o [5]
@@ -386,7 +386,7 @@ HAL_RCC_GetSysClockFreq
                          0x800'0827   0x92  Code  Gb  stm32l4xx_hal_rcc.o [5]
 HAL_RCC_OscConfig        0x800'01bd  0x45e  Code  Gb  stm32l4xx_hal_rcc.o [5]
 HAL_SYSTICK_Config       0x800'0ae9   0x28  Code  Gb  stm32l4xx_hal_cortex.o [5]
-HardFault_Handler        0x800'253b    0x2  Code  Gb  stm32l4xx_it.o [2]
+HardFault_Handler        0x800'2537    0x2  Code  Gb  stm32l4xx_it.o [2]
 I2C_Flush_TXDR           0x800'0e25   0x1c  Code  Lc  stm32l4xx_hal_i2c.o [5]
 I2C_IsErrorOccurred      0x800'0fc1   0xea  Code  Lc  stm32l4xx_hal_i2c.o [5]
 I2C_TransferConfig       0x800'10b7   0x26  Code  Lc  stm32l4xx_hal_i2c.o [5]
@@ -398,76 +398,75 @@ I2C_WaitOnSTOPFlagUntilTimeout
                          0x800'0eef   0x3a  Code  Lc  stm32l4xx_hal_i2c.o [5]
 I2C_WaitOnTXISFlagUntilTimeout
                          0x800'0e95   0x42  Code  Lc  stm32l4xx_hal_i2c.o [5]
-MSIRangeTable            0x800'2414   0x30  Data  Gb  system_stm32l4xx.o [4]
-MemManage_Handler        0x800'253d    0x2  Code  Gb  stm32l4xx_it.o [2]
-NMI_Handler              0x800'2539    0x2  Code  Gb  stm32l4xx_it.o [2]
-PendSV_Handler           0x800'2547    0x2  Code  Gb  stm32l4xx_it.o [2]
+MSIRangeTable            0x800'2410   0x30  Data  Gb  system_stm32l4xx.o [4]
+MemManage_Handler        0x800'2539    0x2  Code  Gb  stm32l4xx_it.o [2]
+NMI_Handler              0x800'2535    0x2  Code  Gb  stm32l4xx_it.o [2]
+PendSV_Handler           0x800'2543    0x2  Code  Gb  stm32l4xx_it.o [2]
 RCCEx_PLLSAI1_Config     0x800'1559   0xb0  Code  Lc  stm32l4xx_hal_rcc_ex.o [5]
 RCCEx_PLLSAI2_Config     0x800'1609   0xae  Code  Lc  stm32l4xx_hal_rcc_ex.o [5]
 RCC_SetFlashLatencyFromMSIRange
                          0x800'08b9   0x6e  Code  Lc  stm32l4xx_hal_rcc.o [5]
-Region$$Table$$Base      0x800'2490          --   Gb  - Linker created -
-Region$$Table$$Limit     0x800'24b4          --   Gb  - Linker created -
-SVC_Handler              0x800'2543    0x2  Code  Gb  stm32l4xx_it.o [2]
-SysTick_Handler          0x800'2549    0x4  Code  Gb  stm32l4xx_it.o [2]
-SystemClock_Config       0x800'1931   0x5e  Code  Gb  main.o [2]
+Region$$Table$$Base      0x800'248c          --   Gb  - Linker created -
+Region$$Table$$Limit     0x800'24b0          --   Gb  - Linker created -
+SVC_Handler              0x800'253f    0x2  Code  Gb  stm32l4xx_it.o [2]
+SysTick_Handler          0x800'2545    0x4  Code  Gb  stm32l4xx_it.o [2]
+SystemClock_Config       0x800'191b   0x5e  Code  Gb  main.o [2]
 SystemCoreClock         0x2000'000c    0x4  Data  Gb  system_stm32l4xx.o [4]
-SystemInit               0x800'24b5    0xc  Code  Gb  system_stm32l4xx.o [4]
-UsageFault_Handler       0x800'2541    0x2  Code  Gb  stm32l4xx_it.o [2]
+SystemInit               0x800'24b1    0xc  Code  Gb  system_stm32l4xx.o [4]
+UsageFault_Handler       0x800'253d    0x2  Code  Gb  stm32l4xx_it.o [2]
 __NVIC_SetPriority       0x800'0a79   0x1a  Code  Lc  stm32l4xx_hal_cortex.o [5]
-__aeabi_memclr4          0x800'1d3d         Code  Gb  ABImemclr4.o [8]
-__aeabi_memset           0x800'1c0d         Code  Gb  ABImemset.o [8]
-__cmain                  0x800'24d5         Code  Gb  cmain.o [8]
-__exit                   0x800'2509   0x14  Code  Gb  exit.o [9]
-__iar_Memset             0x800'1c0d         Code  Gb  ABImemset.o [8]
-__iar_Memset4_word       0x800'2325         Code  Gb  ABImemset48.o [8]
-__iar_Memset8_word       0x800'2325         Code  Gb  ABImemset48.o [8]
-__iar_Memset_word        0x800'1c15         Code  Gb  ABImemset.o [8]
-__iar_copy_init3         0x800'1c73   0x2a  Code  Gb  copy_init3.o [8]
-__iar_data_init3         0x800'2445   0x28  Code  Gb  data_init.o [8]
-__iar_init_vfp           0x800'246d         Code  Gb  fpinit_M.o [7]
-__iar_program_start      0x800'251d         Code  Gb  cstartup_M.o [8]
-__iar_small_Memchr       0x800'2379         Code  Gb  memchr_small.o [8]
-__iar_small_Memcpy       0x800'23c9         Code  Gb  ABImemcpy_small.o [8]
-__iar_small_memchr       0x800'2379         Code  Gb  memchr_small.o [8]
-__iar_small_memcmp       0x800'23a5         Code  Gb  memcmp_small.o [8]
-__iar_small_memcpy       0x800'23c5         Code  Gb  ABImemcpy_small.o [8]
-__iar_small_memcpy4      0x800'23c5         Code  Gb  ABImemcpy_small.o [8]
-__iar_small_memcpy8      0x800'23c5         Code  Gb  ABImemcpy_small.o [8]
-__iar_small_memmove      0x800'2359         Code  Gb  ABImemmove_small.o [8]
-__iar_small_memmove4     0x800'2359         Code  Gb  ABImemmove_small.o [8]
-__iar_small_memmove8     0x800'2359         Code  Gb  ABImemmove_small.o [8]
-__iar_small_strlen       0x800'2391         Code  Gb  strlen_small.o [8]
-__iar_zero_init3         0x800'23dd   0x38  Code  Gb  zero_init3.o [8]
-__low_level_init         0x800'24f3    0x4  Code  Gb  low_level_init.o [6]
+__aeabi_memclr4          0x800'1d29         Code  Gb  ABImemclr4.o [8]
+__aeabi_memset           0x800'1bf9         Code  Gb  ABImemset.o [8]
+__cmain                  0x800'24d1         Code  Gb  cmain.o [8]
+__exit                   0x800'2505   0x14  Code  Gb  exit.o [9]
+__iar_Memset             0x800'1bf9         Code  Gb  ABImemset.o [8]
+__iar_Memset4_word       0x800'2321         Code  Gb  ABImemset48.o [8]
+__iar_Memset8_word       0x800'2321         Code  Gb  ABImemset48.o [8]
+__iar_Memset_word        0x800'1c01         Code  Gb  ABImemset.o [8]
+__iar_copy_init3         0x800'1c5f   0x2a  Code  Gb  copy_init3.o [8]
+__iar_data_init3         0x800'2441   0x28  Code  Gb  data_init.o [8]
+__iar_init_vfp           0x800'2469         Code  Gb  fpinit_M.o [7]
+__iar_program_start      0x800'2519         Code  Gb  cstartup_M.o [8]
+__iar_small_Memchr       0x800'2375         Code  Gb  memchr_small.o [8]
+__iar_small_Memcpy       0x800'23c5         Code  Gb  ABImemcpy_small.o [8]
+__iar_small_memchr       0x800'2375         Code  Gb  memchr_small.o [8]
+__iar_small_memcmp       0x800'23a1         Code  Gb  memcmp_small.o [8]
+__iar_small_memcpy       0x800'23c1         Code  Gb  ABImemcpy_small.o [8]
+__iar_small_memcpy4      0x800'23c1         Code  Gb  ABImemcpy_small.o [8]
+__iar_small_memcpy8      0x800'23c1         Code  Gb  ABImemcpy_small.o [8]
+__iar_small_memmove      0x800'2355         Code  Gb  ABImemmove_small.o [8]
+__iar_small_memmove4     0x800'2355         Code  Gb  ABImemmove_small.o [8]
+__iar_small_memmove8     0x800'2355         Code  Gb  ABImemmove_small.o [8]
+__iar_small_strlen       0x800'238d         Code  Gb  strlen_small.o [8]
+__iar_zero_init3         0x800'23d9   0x38  Code  Gb  zero_init3.o [8]
+__low_level_init         0x800'24ef    0x4  Code  Gb  low_level_init.o [6]
 __vector_table           0x800'0000         Data  Gb  startup_stm32l4r5xx.o [1]
-_call_main               0x800'24e1         Code  Gb  cmain.o [8]
-_exit                    0x800'24fd         Code  Gb  cexit.o [8]
-exit                     0x800'24f7    0x4  Code  Gb  exit.o [6]
+_call_main               0x800'24dd         Code  Gb  cmain.o [8]
+_exit                    0x800'24f9         Code  Gb  cexit.o [8]
+exit                     0x800'24f3    0x4  Code  Gb  exit.o [6]
 hi2c1                   0x2000'0010   0x54  Data  Gb  main.o [2]
-i2cDelayMs               0x800'19f5    0x4  Code  Gb  main.o [2]
-i2cReceive               0x800'19b5    0xc  Code  Gb  main.o [2]
-i2cTransmit              0x800'19a9    0xc  Code  Gb  main.o [2]
-jbAppendBytes            0x800'223d   0x5c  Code  Gb  jsonb.o [3]
-jbCobsDecode             0x800'22d5   0x3a  Code  Gb  jsonb.o [3]
-jbCobsEncode             0x800'2299   0x3c  Code  Gb  jsonb.o [3]
-jbCobsGuaranteedFit      0x800'230f   0x14  Code  Gb  jsonb.o [3]
-jsonbAddItemToObject     0x800'1faf   0x16  Code  Gb  jsonb.o [3]
-jsonbAddObjectBegin      0x800'1f85    0xa  Code  Gb  jsonb.o [3]
-jsonbAddObjectEnd        0x800'1f8f    0xa  Code  Gb  jsonb.o [3]
-jsonbAddString           0x800'1f99   0x16  Code  Gb  jsonb.o [3]
-jsonbAddStringToObject   0x800'1fcf   0x10  Code  Gb  jsonb.o [3]
-jsonbBuf                 0x800'1f75   0x10  Code  Gb  jsonb.o [3]
-jsonbEnumNext            0x800'204d  0x15c  Code  Gb  jsonb.o [3]
-jsonbFormatBegin         0x800'1ef5   0x10  Code  Gb  jsonb.o [3]
-jsonbFormatEnd           0x800'1f05   0x68  Code  Gb  jsonb.o [3]
-jsonbGetObjectItem       0x800'21b9   0x7a  Code  Gb  jsonb.o [3]
-jsonbParse               0x800'1fe5   0x68  Code  Gb  jsonb.o [3]
-main                     0x800'172d  0x1f2  Code  Gb  main.o [2]
+i2cDelayMs               0x800'19e1    0x4  Code  Gb  main.o [2]
+i2cReceive               0x800'19a1    0xc  Code  Gb  main.o [2]
+i2cTransmit              0x800'1995    0xc  Code  Gb  main.o [2]
+jbAppendBytes            0x800'2239   0x5c  Code  Gb  jsonb.o [3]
+jbCobsDecode             0x800'22d1   0x3a  Code  Gb  jsonb.o [3]
+jbCobsEncode             0x800'2295   0x3c  Code  Gb  jsonb.o [3]
+jbCobsGuaranteedFit      0x800'230b   0x14  Code  Gb  jsonb.o [3]
+jsonbAddItemToObject     0x800'1fad   0x16  Code  Gb  jsonb.o [3]
+jsonbAddString           0x800'1f97   0x16  Code  Gb  jsonb.o [3]
+jsonbAddStringToObject   0x800'1fcd   0x10  Code  Gb  jsonb.o [3]
+jsonbEnumNext            0x800'204b  0x15c  Code  Gb  jsonb.o [3]
+jsonbFormatBegin         0x800'1ee1   0x10  Code  Gb  jsonb.o [3]
+jsonbFormatEnd           0x800'1ef1   0x6c  Code  Gb  jsonb.o [3]
+jsonbGetObjectItem       0x800'21b7   0x7a  Code  Gb  jsonb.o [3]
+jsonbObjectBegin         0x800'1f65   0x10  Code  Gb  jsonb.o [3]
+jsonbObjectEnd           0x800'1f75   0x16  Code  Gb  jsonb.o [3]
+jsonbParse               0x800'1fe3   0x68  Code  Gb  jsonb.o [3]
+main                     0x800'172d  0x1dc  Code  Gb  main.o [2]
 memset                   0x800'119d   0x14  Code  Gb  memset.o [8]
-soi2cBuf                 0x800'1d5b   0x10  Code  Gb  soi2c.o [3]
-soi2cReset               0x800'1d43   0x18  Code  Gb  soi2c.o [3]
-soi2cTransaction         0x800'1d6b  0x160  Code  Gb  soi2c.o [3]
+soi2cBuf                 0x800'1d47   0x10  Code  Gb  soi2c.o [3]
+soi2cReset               0x800'1d2f   0x18  Code  Gb  soi2c.o [3]
+soi2cTransaction         0x800'1d57  0x160  Code  Gb  soi2c.o [3]
 uwTick                  0x2000'0004    0x4  Data  Gb  stm32l4xx_hal.o [5]
 uwTickFreq              0x2000'0000    0x1  Data  Gb  stm32l4xx_hal.o [5]
 uwTickPrio              0x2000'0008    0x4  Data  Gb  stm32l4xx_hal.o [5]
@@ -483,7 +482,7 @@ uwTickPrio              0x2000'0008    0x4  Data  Gb  stm32l4xx_hal.o [5]
 [8] = rt7M_tl.a
 [9] = shb_l.a
 
-  9'846 bytes of readonly  code memory
+  9'842 bytes of readonly  code memory
     102 bytes of readonly  data memory
   1'124 bytes of readwrite data memory
 
