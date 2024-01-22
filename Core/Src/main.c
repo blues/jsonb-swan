@@ -1,7 +1,6 @@
 
 #include "main.h"
-#include "soi2c.h"
-#include "jsonb.h"
+#include "notecard.h"
 
 // SWAN LED
 #define LED_Pin                 GPIO_PIN_2
@@ -62,14 +61,14 @@ int main(void)
     }
 
     // Configure I2C to speak to the notecard using our implementation
-    soi2cContext_t soi2c = {0};
-    soi2c.port = &hi2c1;
-    soi2c.tx = i2cTransmit;
-    soi2c.rx = i2cReceive;
-    soi2c.delay = i2cDelayMs;
+    notecardContext_t notecard = {0};
+    notecard.port = &hi2c1;
+    notecard.tx = i2cTransmit;
+    notecard.rx = i2cReceive;
+    notecard.delay = i2cDelayMs;
 
     // Reset I2C so that it's clean from any prior reboot
-    soi2cReset(&soi2c);
+    notecardReset(&notecard);
 
     // Test
     while (true) {
@@ -77,7 +76,7 @@ int main(void)
         uint8_t *rsp;
         uint8_t req[512];
         jsonbContext jsonb;
-        soiStatus_t status;
+        notecardStatus_t status;
 
         // Format a JSONB request to be sent to the notecard
         jsonbObjectBegin(&jsonb, req, sizeof(req), NULL);
@@ -87,8 +86,8 @@ int main(void)
         }
 
         // Send the JSONB request over I2C, and receive the response in the same buffer
-        status = soi2cRequestResponse(&soi2c, req, sizeof(req));
-        if (status != SOI2C_OK) {
+        status = notecardRequestResponse(&notecard, req, sizeof(req));
+        if (status) {
             for (int i=0; i<status; i++) {
                 HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
                 HAL_Delay(250);
@@ -100,7 +99,7 @@ int main(void)
         }
 
         // Parse the response
-        rsplen = soi2cBuf(&soi2c, &rsp, NULL);
+        rsplen = notecardBuf(&notecard, &rsp, NULL);
         if (!jsonbParse(&jsonb, rsp, rsplen)) {
             for (int i=0; i<3; i++) {
                 HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
@@ -113,9 +112,8 @@ int main(void)
         }
 
         // Look for an error
-        uint8_t itemType;
-        uint8_t *itemValue;
-        if (jsonbGetObjectItem(&jsonb, "err", &itemType, &itemValue)) {
+        char *deviceUID = jsonbGetString(&jsonb, "device");
+        if (deviceUID[0] == '\0') {
             HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
             HAL_Delay(1000);
             HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
