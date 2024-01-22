@@ -91,6 +91,7 @@ int soi2cTransaction(soi2cContext_t *ctx, uint32_t flags, uint8_t *buf, uint32_t
     // Go into a receive loop, using the txbuf as a (potentially-growing) rxbuf.
     uint32_t msLeftToWait = 5000;
     uint8_t chunklen = 0;
+    ctx->bufused = 0;
     while (true) {
         uint8_t hdrlen = 2;
 
